@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+.formularioJogador{
+	position:absolute;
+	top:130px;
+	left:450px;
+}
+
+body
+{
+	background-color: #e74c3c;
+}
+
+table, th, td {
+   border: 1px solid white;
+   color: white;
+}
+
+.fonteTexto
+{
+	color: #ecf0f1;
+}

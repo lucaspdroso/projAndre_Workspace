@@ -34,7 +34,6 @@ public class Carregar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		response.setContentType( "text/html" );
 		PrintWriter out = response.getWriter();
@@ -61,8 +60,13 @@ public class Carregar extends HttpServlet {
 			out.println("<head>");
 			out.println("<meta charset='utf-8'>");
 			out.println("<title> Cadastro de Times e Jogadores </title>");
+			out.println("<link rel='stylesheet' href='Estiloso.css' type='text/css'>");
+			out.println("<script src='Scriptoso.js'></script>");
 			out.println("</head>");
 			out.println("<body>");
+			
+			out.println("<div class='fonteTexto'>");
+			
 			out.println("<h1> Manipular Times </h1>  <br><br>");
 			
 			out.println("<br>");
@@ -101,7 +105,7 @@ public class Carregar extends HttpServlet {
 			
 			out.println("</table>");
 			out.println("<br>");
-			out.println("<h5>  ID do Time: </h5> <input type='text' name='idTime'>");
+			out.println("<h5>  ID do Time: </h5> <input type='text' name='idTime' onkeypress='return isNumberKey(event)'>");
 			out.println("<h5>  Nome: </h5> <input type='text' name='nome'>");
 			out.println("<h5>  Sigla: </h5> <input type='text' name='sigla'>");
 			out.println("<h5>  UF: </h5> <input type='text' name='uf'>");
@@ -111,9 +115,11 @@ public class Carregar extends HttpServlet {
 			out.println("<button type='submit' name='sender' value='Excluir'> Excluir </button>");
 			out.println("<button type='submit' name='sender' value='Alterar'> Alterar </button>");
 			out.println("</form>");
-
+			
+			out.println("<div class='formularioJogador'>");
+			
 			out.println("<form action='CRUDJogador'>");
-			out.println("<h3>  Inclusão de Jogador </h1> <br>");
+			out.println("<h3>  Inclusão de Jogador </h1>");
 			out.println("<br>");
 			out.println("<table border='1'>");
 			
@@ -164,9 +170,13 @@ public class Carregar extends HttpServlet {
 			out.println("<button type='submit' name='sender' value='Incluir'> Incluir </button>");
 			out.println("<button type='submit' name='sender' value='Excluir'> Excluir </button>");
 			out.println("<button type='submit' name='sender' value='Alterar'> Alterar </button>");
+			
 			out.println("</form>");
+			
+			out.println("</div>");
 
 			out.println("<br>");
+			out.println("</div>");
 			out.println("</body>");
 			out.println("</html>");
 
