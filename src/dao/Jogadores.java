@@ -159,10 +159,10 @@ public class Jogadores {
         }
     }
     
-    public void incluirNoTime(Jogador jogador, Time time) throws Exception
+    public void incluirNoTime(String CPF, int idTime) throws Exception
     {
-        if (jogador == null)
-            throw new Exception ("Livro não fornecido.");
+        if (CPF.equals(""))
+            throw new Exception ("Jogador não fornecido.");
 
         try
         {
@@ -172,8 +172,60 @@ public class Jogadores {
 
             bd.prepareStatement (sql);
 
-            bd.setString (1, jogador.getCpf());
-            bd.setInt    (2, time.getIdTime());
+            bd.setString (1, CPF);
+            bd.setInt    (2, idTime);
+
+
+            bd.executeUpdate ();
+            bd.commit();
+            
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception (erro.getMessage()/*"Erro ao inserir jogador."*/);
+        }
+    }
+    
+    public void AlterarTimeJogador(String CPF, int idTime) throws Exception
+    {
+        if (CPF.equals(""))
+            throw new Exception ("Jogador não fornecido.");
+
+        try
+        {
+            String sql;
+
+            sql = "update [BDu14180].tdi_TimeJogador set idTime = ? where CPF = ?";
+
+            bd.prepareStatement (sql);
+
+            bd.setInt    (1, idTime);
+            bd.setString (2, CPF);
+
+            bd.executeUpdate ();
+            bd.commit();
+            
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("deu erro aqui.");
+        }
+    }
+    
+    public void excluirDoTime(String CPF) throws Exception
+    {
+        if (CPF.equals(""))
+            throw new Exception ("Jogador não fornecido.");
+
+        try
+        {
+            String sql;
+
+            sql = "delete from [BDu14180].tdi_TimeJogador where cpf = ?";
+
+            bd.prepareStatement (sql);
+
+            bd.setString (1, CPF);
 
 
             bd.executeUpdate ();
@@ -192,7 +244,10 @@ public class Jogadores {
         {
             String sql;
 
-            sql = "select tdi_Jogador.nome, tdi_Time.nome from [BDu14180].tdi_Jogador, [BDu14180].tdi_Jogador where tdi_Jogador.CPF = [BDu14180].tdi_TimeJogador";
+            sql = "select [BDu14180].tdi_Jogador.nome as nomeJogador, [BDu14180].tdi_Time.nome as nomeTime from [BDu14180].tdi_Jogador, "
+            		+ "[BDu14180].tdi_Time, [BDu14180].tdi_TimeJogador "
+            		+ "where [BDu14180].tdi_Jogador.CPF = [BDu14180].tdi_TimeJogador.CPF and "
+            		+ "[BDu14180].tdi_Time.idTime = [BDu14180].tdi_TimeJogador.idTime";
 
             bd.prepareStatement (sql);
             
@@ -202,7 +257,7 @@ public class Jogadores {
         }
         catch (SQLException erro)
         {
-            throw new Exception ("Erro ao jogadores.");
+            throw new Exception ("giovanna mané");
         }
     }
 

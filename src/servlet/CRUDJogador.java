@@ -103,6 +103,64 @@ public class CRUDJogador extends HttpServlet {
     	    				jogs.alterar(jog);
     	    				response.getWriter().println("Jogador alterado com sucesso.");
     					}
+    					else
+    						if (botao.equals("IncluirRelacao"))
+    						{
+    							String cpf = request.getParameter("cpf");
+    							int idTime = Integer.parseInt(request.getParameter("idTime"));
+    							
+    							
+    							MeuPreparedStatement comando = (MeuPreparedStatement)request.getSession().getAttribute("conexao");
+        	    				
+        	    				if (comando == null)
+        	    				{
+        	    					comando = new MeuPreparedStatement("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://regulus:1433;databasename=BDu14180",
+        	    							"BDu14180", "cotuca");
+        	    					request.getSession().setAttribute("conexao", comando);
+        	    				}
+        	    				
+        	    				Jogadores jogs = new Jogadores(comando);
+        	    				jogs.incluirNoTime(cpf, idTime);
+        	    				response.getWriter().println("Jogador incluido no time com sucesso.");
+    						}
+    						else
+    							if (botao.equals("ExcluirRelacao"))
+        						{
+    								String cpf = request.getParameter("cpf");       							
+        							
+        							MeuPreparedStatement comando = (MeuPreparedStatement)request.getSession().getAttribute("conexao");
+            	    				
+            	    				if (comando == null)
+            	    				{
+            	    					comando = new MeuPreparedStatement("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://regulus:1433;databasename=BDu14180",
+            	    							"BDu14180", "cotuca");
+            	    					request.getSession().setAttribute("conexao", comando);
+            	    				}
+            	    				
+            	    				Jogadores jogs = new Jogadores(comando);
+            	    				jogs.excluirDoTime(cpf);
+            	    				response.getWriter().println("Jogador excluido no time com sucesso.");
+        						}
+        						else
+        							if (botao.equals("AlterarRelacao"))
+            						{
+        								String cpf = request.getParameter("cpf");
+            							int idTime = Integer.parseInt(request.getParameter("idTime"));
+            							
+            							
+            							MeuPreparedStatement comando = (MeuPreparedStatement)request.getSession().getAttribute("conexao");
+                	    				
+                	    				if (comando == null)
+                	    				{
+                	    					comando = new MeuPreparedStatement("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://regulus:1433;databasename=BDu14180",
+                	    							"BDu14180", "cotuca");
+                	    					request.getSession().setAttribute("conexao", comando);
+                	    				}
+                	    				
+                	    				Jogadores jogs = new Jogadores(comando);
+                	    				jogs.AlterarTimeJogador(cpf, idTime);
+                	    				response.getWriter().println("Time do Jogador alterado com sucesso.");
+            						}
     			
     		}
     		catch (Exception e)
