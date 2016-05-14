@@ -149,4 +149,27 @@ public class Times {
             throw new Exception ("Erro ao Times.");
         }
     }
+    
+    public MeuResultSet pesquisa(int idTime) throws Exception
+    {
+
+        try
+        {
+            String sql;
+
+            sql = "select * from [BDu14180].tdi_Time where idTime = ?";
+
+            bd.prepareStatement (sql);
+            
+            bd.setInt (1, idTime);
+            
+            MeuResultSet resultado = bd.executeQuery();
+
+            return resultado;
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("Erro ao Times.");
+        }
+    }
 }

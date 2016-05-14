@@ -159,6 +159,29 @@ public class Jogadores {
         }
     }
     
+    public MeuResultSet pesquisa(String cpf) throws Exception
+    {
+
+        try
+        {
+            String sql;
+
+            sql = "select * from [BDu14180].tdi_Jogador where CPF = ?";     
+
+            bd.prepareStatement (sql);
+            
+            bd.setString (1, cpf);
+            
+            MeuResultSet resultado = bd.executeQuery();
+
+            return resultado;
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("Erro ao jogadores.");
+        }
+    }
+    
     public void incluirNoTime(String CPF, int idTime) throws Exception
     {
         if (CPF.equals(""))
